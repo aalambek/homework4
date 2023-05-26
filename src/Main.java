@@ -12,7 +12,6 @@ public class Main {
 
     public static int[] heroDamage = {10, 15, 20, 0};
     public static String[] heroesAttackTupe = {"Physical", "Magical", "kinetic", "Medic"};
-
     public static int medicUnit = 30;
     public static int roundNumber = 0;
 
@@ -25,15 +24,14 @@ public class Main {
     }
 
     public static void medicHeals(){
-        Random random = new Random();
-        int chance = random.nextInt(heroHealth.length);
-        if (heroHealth[chance] >0 && heroHealth[chance]<100 && heroHealth[3] > 0 && heroesAttackTupe[chance] != heroesAttackTupe[3]){
-            heroHealth[chance]= heroHealth[chance] + medicUnit;
-            System.out.println("Medic healed on: "+medicUnit+ heroesAttackTupe[chance]);
+        for (int i = 0; i < heroHealth.length; i++) {
+            if (heroHealth[i] >0 && heroHealth[i]<100 && heroHealth[3] > 0 && heroesAttackTupe[i] != heroesAttackTupe[3]){
+                heroHealth[i]= heroHealth[i] + medicUnit;
+                System.out.println("Medic healed on: "+medicUnit+ heroesAttackTupe[i]);
+                break;
+            }
         }
     }
-
-    
 
     public static void chooseBossDefence() {
         Random random = new Random();
@@ -86,11 +84,6 @@ public class Main {
             System.out.println("Heroes won!!!");
             return true;
         }
-        /*if (heroHealth[0] <= 0 && heroHealth[1] <= 0 && heroHealth[2] <= 0) {
-            System.out.println("Boss won!!!");
-            return true;
-        }
-        return false;*/
         boolean allHeroDead = true;
         for (int i = 0; i < heroHealth.length; i++) {
             if (heroHealth[i] > 0) {
@@ -106,12 +99,6 @@ public class Main {
 
     public static void printStatistics() {
         System.out.println("ROUND " + roundNumber + "_ _ _ _ _ _ _ _ _ _");
-      /*  String defence;
-        if (bossDefense == null){
-            defence = "No defence";
-        }else {
-            defence = bossDefense;
-        }*/
         System.out.println("Boss health: " + bossHealth + "damage: " +
                 bossDamage + "defence: " +
                 (bossDefence == null ? "No defence" : bossDefence));
